@@ -50,8 +50,7 @@ body {
 }
 
 .header__nav {
-  display: grid;
-  grid-template-columns: 2fr 8fr 2fr;
+  display: flex;
 }
 
 .header__logo {
@@ -59,6 +58,7 @@ body {
   width: 9.7rem;
   height: auto;
   justify-self: center;
+  margin-left: 12rem;
 }
 
 .header__search {
@@ -71,6 +71,7 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   outline: none;
+  max-width: 50rem;
 }
 
 .header__tempButton {
@@ -78,6 +79,10 @@ body {
   border: none;
   outline: none;
   border-radius: 0.4rem;
+  width: 100%;
+  max-width: 25rem !important;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .header__searchContainer {
@@ -85,7 +90,8 @@ body {
   align-self: center;
   width: 45%;
   margin: 0.3rem 0rem;
-  margin-left: 1rem;
+  margin-left: 11rem;
+  margin-right: 5rem;
 }
 
 .header__searchButton {
@@ -238,12 +244,14 @@ body {
 .table-container {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .table {
   border-collapse: collapse;
-  width: 60%;
+  max-width: 100rem;
   margin-top: 5rem;
+  width: 100%;
 }
 
 .table__header {
@@ -287,3 +295,220 @@ tr {
 }
 
 /* Table End */
+
+
+
+@media (max-width: 1400px) {
+  .header__tempButton{
+    max-width: 15rem !important;
+  }
+}
+
+
+@media (max-width: 1200px) {
+
+  .article__row {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-card-section{
+    margin-bottom: 5rem;
+  }
+
+  .hourly-forecast-section {
+    flex: 1.5;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .table {
+    max-width: 65rem;
+  }
+
+  .description-section {
+    gap: 7rem;
+  }
+
+  .header__tempButton{
+    max-width: 12rem !important;
+    margin-left: 5rem;
+
+  }
+
+  .header__logo {
+    margin-left: 3rem;
+  }
+
+  .header__searchContainer{
+    width: 100%;
+    align-self: flex-start;
+    margin-left: 10rem;
+  }
+
+  .header__search {
+    width: 100%;
+    max-width: 40rem !important;
+  }
+
+}
+
+@media (max-width: 1070px) {
+  .header__searchContainer{
+    margin-left: 5rem;
+  }
+  .hourly-forecast-section {
+    gap: 1rem;
+    padding-left: 2rem;
+  }
+}
+
+
+@media (max-width: 820px) {
+  .description-section {
+    gap: 3rem;
+  }
+  .table {
+    max-width: 55rem;
+  }
+  .hourly-forecast-section {
+    gap: 1rem;
+  }
+
+  .header__search {
+    max-width: 30rem !important;
+  }
+
+ 
+
+  .header__tempButton{
+    margin-left: 3rem;
+
+  }
+  .header__nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem
+  }
+
+  .header__searchContainer{
+    margin: 0;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .header__logo {
+    margin: 0;
+
+    width: 13rem;
+  }
+
+  .header__tempButton{
+    margin: 0;
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+    max-width: 12rem !important;
+
+  }
+
+
+}
+
+@media (max-width: 750px) {
+  .hourly-forecast-section {
+    gap: .5rem;
+  }
+  .description-section {
+    gap: 2rem;
+  }
+  .table {
+    max-width: 75rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .hourly-forecast-card__image{
+    width: 7.5rem;
+  }
+  th {
+    display: none;
+  }
+
+  .title-card-summary {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+ 
+  tr > td:nth-child(3) { display: none; }
+  tr > td:nth-child(4) { display: none; }
+
+}
+
+
+
+@media (max-width: 600px) {
+  .description-section {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  
+
+  .description-section__column {
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .description-card__title{
+    text-align: left;
+  }
+
+  .description-card__data{
+    text-align: left;
+  }
+
+  .description-card{
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(45, 51, 56);
+  }
+
+  .hourly-forecast-section {
+    gap: 0rem;
+  }
+  .hourly-forecast-card__image{
+    width: 5rem;
+  }
+  
+  
+
+  td {
+    margin-right: 1rem;
+  }
+
+
+}
+
+@media (max-width: 520px) {
+  .description-section {
+    gap: 1.0rem;
+  }
+
+}
+
+@media (max-width: 450px) {
+  .header__search {
+    max-width: 20rem !important;
+  }
+  .hourly-forecast-section {
+    padding: 0;
+  }
+
+
+}
