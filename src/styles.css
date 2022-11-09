@@ -66,8 +66,10 @@ body {
   flex: 1;
   padding: 0rem;
   border: 1px solid lightgray;
-  border-top-left-radius: 0.4rem;
-  border-bottom-left-radius: 0.4rem;
+  border-top-left-radius: 0.4rem !important;
+  border-bottom-left-radius: 0.4rem !important;
+  border-top-right-radius: 0 !important ;
+  border-bottom-right-radius: 0 !important ;
   height: 3.7rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -324,12 +326,17 @@ tr {
 
 /* Table End */
 
-
 /* Media Queries Start*/
 
 @media (max-width: 1400px) {
   .header__tempButton {
     max-width: 15rem !important;
+  }
+}
+
+@media (max-width: 1300px) {
+  .header__tempButton:hover {
+    background-color: rgb(248,249,250);
   }
 }
 
@@ -542,6 +549,10 @@ tr {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
