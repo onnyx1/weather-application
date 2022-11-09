@@ -76,6 +76,7 @@ body {
   outline: none;
   max-width: 50rem;
   transition-duration: 400ms;
+  -webkit-appearance: none;
 }
 
 .header__search:focus {
