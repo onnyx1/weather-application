@@ -37,6 +37,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
   color: var(--mainText-color);
+  position: relative;
 }
 
 /* Header Start */
@@ -117,12 +118,12 @@ body {
   background-color: var(--tempButton-background);
 }
 
-.header__tempButton{
+.header__tempButton {
   transition-duration: 300ms;
 }
 
 .header__tempButton:hover {
-background-color: var(--search-background);
+  background-color: var(--search-background);
 }
 
 .header__tempButton__F--bold {
@@ -132,7 +133,6 @@ background-color: var(--search-background);
 .header__tempButton__C--bold {
   font-weight: bold;
 }
-
 
 /* Header End */
 
@@ -323,6 +323,9 @@ tr {
 }
 
 /* Table End */
+
+
+/* Media Queries Start*/
 
 @media (max-width: 1400px) {
   .header__tempButton {
@@ -518,4 +521,27 @@ tr {
   .hourly-forecast-section {
     padding: 0;
   }
+}
+
+/* Media Queries End*/
+
+.loader {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid var(--search-background); /* Blue */
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

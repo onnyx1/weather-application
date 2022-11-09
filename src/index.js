@@ -9,13 +9,21 @@ const app = {
   forecastWeather: null,
   hourlyWeather: null,
   imperial: true,
-  loadJson: function (url) {
+
+  loadJson(url) {
+    document.querySelector(".loader").style.display = "block";
     return fetch(url).then((response) => response.json());
   },
 
   init() {
     searchButton.addEventListener("click", app.grabWeather);
     tempButton.addEventListener("click", app.changeUnits);
+    searchBar.addEventListener("keyup", (event) => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        searchButton.click();
+      }
+    });
     app
       .loadJson(`https://api.openweathermap.org/data/2.5/weather?q=Fairbanks&APPID=c31a4ec530e3f92cc56e0267f1d0a374&units=imperial`)
       .then((data) => {
@@ -30,7 +38,10 @@ const app = {
         app.hourlyWeather = data;
         app.showWeather();
       })
-      .catch((error) => alert("Please enter a valid city."));
+      .finally(() => {
+        document.querySelector(".loader").style.display = "none";
+      })
+      .catch(() => alert("Please enter a valid city."));
   },
 
   grabWeather() {
@@ -49,7 +60,10 @@ const app = {
           app.hourlyWeather = data;
           app.showWeather();
         })
-        .catch((error) => alert("Please enter a valid city."));
+        .finally(() => {
+          document.querySelector(".loader").style.display = "none";
+        })
+        .catch(() => alert("Please enter a valid city."));
     } else {
       app
         .loadJson(`https://api.openweathermap.org/data/2.5/weather?q=${searchBar.value}&APPID=c31a4ec530e3f92cc56e0267f1d0a374&units=metric`)
@@ -65,21 +79,14 @@ const app = {
           app.hourlyWeather = data;
           app.showWeather();
         })
-        .catch((error) => alert("Please enter a valid city."));
+        .finally(() => {
+          document.querySelector(".loader").style.display = "none";
+        })
+        .catch(() => alert("Please enter a valid city."));
     }
   },
 
   showWeather() {
-    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    console.log(weekday[new Date(app.forecastData.list[0].dt * 1000).getUTCDay()]);
-    console.log(app.forecastData.list[0].pop + "%");
-    console.log(app.forecastData.list[0].humidity + "%");
-    console.log(Math.round(app.forecastData.list[0].temp.max));
-    console.log(Math.round(app.forecastData.list[0].temp.min));
-
-    console.log(app.forecastData);
-    console.log(app.currentWeather);
     app.clear();
 
     const page = `<article class="article">
@@ -178,18 +185,18 @@ const app = {
 
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    for (let dailyData of app.forecastData.list) {
-      let row = table.insertRow(-1);
-      let c1 = row.insertCell(0);
-      let c2 = row.insertCell(1);
-      let c3 = row.insertCell(2);
-      let c4 = row.insertCell(3);
-      let c5 = row.insertCell(4);
+    for (const dailyData of app.forecastData.list) {
+      const row = table.insertRow(-1);
+      const c1 = row.insertCell(0);
+      const c2 = row.insertCell(1);
+      const c3 = row.insertCell(2);
+      const c4 = row.insertCell(3);
+      const c5 = row.insertCell(4);
 
       c1.innerText = weekday[new Date(dailyData.dt * 1000).getUTCDay()];
       c2.innerHTML = `<img src="http://openweathermap.org/img/wn/${dailyData.weather[0].icon}@2x.png" alt="" />`;
-      c3.innerText = Math.round(dailyData.pop * 100) + "%";
-      c4.innerText = Math.round(dailyData.humidity) + "%";
+      c3.innerText = `${Math.round(dailyData.pop * 100)}%`;
+      c4.innerText = `${Math.round(dailyData.humidity)}%`;
       c5.innerHTML = `<span class = "space cell_max">${Math.round(dailyData.temp.max)}&#176;</span><span class = "cell_min">${Math.round(dailyData.temp.min)}&#176;</span>`;
     }
   },
@@ -199,8 +206,8 @@ const app = {
 
     let string = "";
 
-    for (let hourlyData of app.hourlyWeather.list) {
-      let card = `<section class="hourly-forecast-card">
+    for (const hourlyData of app.hourlyWeather.list) {
+      const card = `<section class="hourly-forecast-card">
           <div class="hourly-forecast-card__time">${new Date(hourlyData.dt * 1000).getHours()}</div>
           <div class="hourly-forecast-card__precip">${Math.round(hourlyData.pop * 100)}%</div>
           <img class="hourly-forecast-card__image" src="http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}@2x.png" alt="" />
@@ -220,12 +227,11 @@ const app = {
     if (app.imperial) {
       app.imperial = false;
 
-      const hourly_temps = document.querySelectorAll(".hourly-forecast-card__temp");
+      const hourlyTemps = document.querySelectorAll(".hourly-forecast-card__temp");
 
-      for (let temp of hourly_temps) {
+      for (const temp of hourlyTemps) {
         temp.textContent = temp.textContent.replace("°", "");
         temp.textContent = `${Math.round(app.fToC(Number(temp.textContent)) * 10) / 10}°`;
-        console.log("Hi");
       }
 
       document.querySelector(".title-card__temp").textContent = document.querySelector(".title-card__temp").textContent.replace("°", "");
@@ -240,24 +246,23 @@ const app = {
       document.querySelector(".description-card__data__feelsLike").textContent = document.querySelector(".description-card__data__feelsLike").textContent.replace("°", "");
       document.querySelector(".description-card__data__feelsLike").textContent = `${Math.round(app.fToC(Number(document.querySelector(".description-card__data__feelsLike").textContent)) * 10) / 10}°`;
 
-      for (let cellMaxTemp of document.querySelectorAll(".cell_max")) {
+      for (const cellMaxTemp of document.querySelectorAll(".cell_max")) {
         cellMaxTemp.textContent = cellMaxTemp.textContent.replace("°", "");
         cellMaxTemp.textContent = `${Math.round(app.fToC(Number(cellMaxTemp.textContent)) * 10) / 10}°`;
       }
 
-      for (let cellMinTemp of document.querySelectorAll(".cell_min")) {
+      for (const cellMinTemp of document.querySelectorAll(".cell_min")) {
         cellMinTemp.textContent = cellMinTemp.textContent.replace("°", "");
         cellMinTemp.textContent = `${Math.round(app.fToC(Number(cellMinTemp.textContent)) * 10) / 10}°`;
       }
     } else {
       app.imperial = true;
 
-      const hourly_temps = document.querySelectorAll(".hourly-forecast-card__temp");
+      const hourlyTemps = document.querySelectorAll(".hourly-forecast-card__temp");
 
-      for (let temp of hourly_temps) {
+      for (const temp of hourlyTemps) {
         temp.textContent = temp.textContent.replace("°", "");
         temp.textContent = `${Math.round(app.cToF(Number(temp.textContent)))}°`;
-        console.log("Hi");
       }
 
       document.querySelector(".title-card__temp").textContent = document.querySelector(".title-card__temp").textContent.replace("°", "");
@@ -272,12 +277,12 @@ const app = {
       document.querySelector(".description-card__data__feelsLike").textContent = document.querySelector(".description-card__data__feelsLike").textContent.replace("°", "");
       document.querySelector(".description-card__data__feelsLike").textContent = `${Math.round(app.cToF(Number(document.querySelector(".description-card__data__feelsLike").textContent)))}°`;
 
-      for (let cellMaxTemp of document.querySelectorAll(".cell_max")) {
+      for (const cellMaxTemp of document.querySelectorAll(".cell_max")) {
         cellMaxTemp.textContent = cellMaxTemp.textContent.replace("°", "");
         cellMaxTemp.textContent = `${Math.round(app.cToF(Number(cellMaxTemp.textContent)))}°`;
       }
 
-      for (let cellMinTemp of document.querySelectorAll(".cell_min")) {
+      for (const cellMinTemp of document.querySelectorAll(".cell_min")) {
         cellMinTemp.textContent = cellMinTemp.textContent.replace("°", "");
         cellMinTemp.textContent = `${Math.round(app.cToF(Number(cellMinTemp.textContent)))}°`;
       }
@@ -287,6 +292,7 @@ const app = {
   fToC(num) {
     return ((num - 32) * 5) / 9;
   },
+
   cToF(num) {
     return (num * 9) / 5 + 32;
   },
