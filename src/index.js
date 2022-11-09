@@ -12,7 +12,12 @@ const app = {
 
   loadJson(url) {
     document.querySelector(".loader").style.display = "block";
-    return fetch(url).then((response) => response.json());
+    return fetch(url).then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error();
+    });
   },
 
   init() {
@@ -56,6 +61,7 @@ const app = {
           app.forecastData = data;
           return app.loadJson(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${searchBar.value}&cnt=24&APPID=0d5f22678e05d6d4aad7d8ee355979cf&units=imperial`);
         })
+
         .then((data) => {
           app.hourlyWeather = data;
           app.showWeather();
@@ -87,6 +93,7 @@ const app = {
   },
 
   showWeather() {
+
     app.clear();
 
     const page = `<article class="article">
