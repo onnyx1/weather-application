@@ -72,6 +72,12 @@ body {
   padding-right: 1rem;
   outline: none;
   max-width: 50rem;
+  transition-duration: 400ms;
+}
+
+.header__search:focus {
+  border: 1px solid #80bdff;
+  box-shadow: 0px 0px 5px #80bdff;
 }
 
 .header__tempButton {
@@ -110,6 +116,23 @@ body {
 .header__tempButton--white {
   background-color: var(--tempButton-background);
 }
+
+.header__tempButton{
+  transition-duration: 300ms;
+}
+
+.header__tempButton:hover {
+background-color: var(--search-background);
+}
+
+.header__tempButton__F--bold {
+  font-weight: bold;
+}
+
+.header__tempButton__C--bold {
+  font-weight: bold;
+}
+
 
 /* Header End */
 
@@ -170,6 +193,7 @@ body {
   font-weight: 500;
   margin: 0;
   margin-bottom: 1rem;
+  padding-left: 1rem;
 }
 
 .title-card__description {
@@ -180,7 +204,7 @@ body {
 .title-card__temp {
   font-size: 9.6rem;
   font-weight: 300;
-  padding-left: 3rem;
+  padding-left: 2.4rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -294,19 +318,19 @@ tr {
   border-bottom: 1px solid lightgray;
 }
 
+.space {
+  margin-right: 0.7rem;
+}
+
 /* Table End */
 
-
-
 @media (max-width: 1400px) {
-  .header__tempButton{
+  .header__tempButton {
     max-width: 15rem !important;
   }
 }
 
-
 @media (max-width: 1200px) {
-
   .article__row {
     display: flex;
     flex-direction: column;
@@ -319,7 +343,7 @@ tr {
     align-items: center;
   }
 
-  .title-card-section{
+  .title-card-section {
     margin-bottom: 5rem;
   }
 
@@ -328,7 +352,7 @@ tr {
     gap: 2.5rem;
     margin-bottom: 3rem;
   }
-  
+
   .table {
     max-width: 65rem;
   }
@@ -337,17 +361,16 @@ tr {
     gap: 7rem;
   }
 
-  .header__tempButton{
+  .header__tempButton {
     max-width: 12rem !important;
     margin-left: 5rem;
-
   }
 
   .header__logo {
     margin-left: 3rem;
   }
 
-  .header__searchContainer{
+  .header__searchContainer {
     width: 100%;
     align-self: flex-start;
     margin-left: 10rem;
@@ -357,11 +380,10 @@ tr {
     width: 100%;
     max-width: 40rem !important;
   }
-
 }
 
 @media (max-width: 1070px) {
-  .header__searchContainer{
+  .header__searchContainer {
     margin-left: 5rem;
   }
   .hourly-forecast-section {
@@ -369,7 +391,6 @@ tr {
     padding-left: 2rem;
   }
 }
-
 
 @media (max-width: 820px) {
   .description-section {
@@ -386,19 +407,16 @@ tr {
     max-width: 30rem !important;
   }
 
- 
-
-  .header__tempButton{
+  .header__tempButton {
     margin-left: 3rem;
-
   }
   .header__nav {
     flex-direction: column;
     align-items: center;
-    gap: 1rem
+    gap: 1rem;
   }
 
-  .header__searchContainer{
+  .header__searchContainer {
     margin: 0;
     align-self: center;
     justify-content: center;
@@ -410,20 +428,17 @@ tr {
     width: 13rem;
   }
 
-  .header__tempButton{
+  .header__tempButton {
     margin: 0;
-    padding-top: .7rem;
-    padding-bottom: .7rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
     max-width: 12rem !important;
-
   }
-
-
 }
 
 @media (max-width: 750px) {
   .hourly-forecast-section {
-    gap: .5rem;
+    gap: 0.5rem;
   }
   .description-section {
     gap: 2rem;
@@ -433,7 +448,7 @@ tr {
     margin-left: 2rem;
     margin-right: 2rem;
   }
-  .hourly-forecast-card__image{
+  .hourly-forecast-card__image {
     width: 7.5rem;
   }
   th {
@@ -444,13 +459,14 @@ tr {
     margin-left: 2rem;
     margin-right: 2rem;
   }
- 
-  tr > td:nth-child(3) { display: none; }
-  tr > td:nth-child(4) { display: none; }
 
+  tr > td:nth-child(3) {
+    display: none;
+  }
+  tr > td:nth-child(4) {
+    display: none;
+  }
 }
-
-
 
 @media (max-width: 600px) {
   .description-section {
@@ -458,22 +474,20 @@ tr {
     gap: 1.5rem;
   }
 
-  
-
   .description-section__column {
     gap: 2rem;
     align-items: flex-start;
   }
 
-  .description-card__title{
+  .description-card__title {
     text-align: left;
   }
 
-  .description-card__data{
+  .description-card__data {
     text-align: left;
   }
 
-  .description-card{
+  .description-card {
     width: 100%;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgb(45, 51, 56);
@@ -482,24 +496,19 @@ tr {
   .hourly-forecast-section {
     gap: 0rem;
   }
-  .hourly-forecast-card__image{
+  .hourly-forecast-card__image {
     width: 5rem;
   }
-  
-  
 
   td {
     margin-right: 1rem;
   }
-
-
 }
 
 @media (max-width: 520px) {
   .description-section {
-    gap: 1.0rem;
+    gap: 1rem;
   }
-
 }
 
 @media (max-width: 450px) {
@@ -509,6 +518,4 @@ tr {
   .hourly-forecast-section {
     padding: 0;
   }
-
-
 }
