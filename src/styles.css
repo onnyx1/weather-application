@@ -480,6 +480,10 @@ tr {
 }
 
 @media (max-width: 600px) {
+  input[type="search"] {
+    border-radius: 0 !important;
+    -webkit-appearance: none !important;
+  }
   .description-section {
     flex-direction: column;
     gap: 1.5rem;
@@ -557,3 +561,4 @@ tr {
     transform: rotate(360deg);
   }
 }
+
