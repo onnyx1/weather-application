@@ -95,7 +95,6 @@ const app = {
   showWeather() {
 
     app.clear();
-console.log(this.currentWeather);
     const page = `<article class="article">
     <div class="article__row">
       <article class="title-card-section">
