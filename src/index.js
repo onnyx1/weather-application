@@ -95,12 +95,12 @@ const app = {
   showWeather() {
 
     app.clear();
-
+console.log(this.currentWeather);
     const page = `<article class="article">
     <div class="article__row">
       <article class="title-card-section">
         <article class="title-card">
-          <h1 class="title-card__city">${this.currentWeather.name}</h1>
+          <h1 class="title-card__city">${this.currentWeather.name}, ${this.currentWeather.sys.country}</h1>
           <div class="title-card__description">${this.currentWeather.weather[0].main}</div>
           <div class="title-card__temp">${Math.round(this.currentWeather.main.temp)}&#176;</div>
           <div class="title-card__temps"><span>H:<span class = "title-card__max">${Math.round(app.forecastData.list[0].temp.max)}</span>&#176; L:<span class="title-card__min">${Math.round(app.forecastData.list[0].temp.min)}</span>&#176;</div>
